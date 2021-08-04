@@ -7,6 +7,7 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
+    @user = current_user
     @q = current_user.tasks.includes(:user).ransack(params[:q])
     @tasks = @q.result(distinct: true).page(params[:page]).per(2)
 
